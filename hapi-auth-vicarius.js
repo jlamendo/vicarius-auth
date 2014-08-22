@@ -36,7 +36,7 @@ internals.implementation = function (server, options) {
         }else if (request.headers['X-Vicarius-Auth']){
            token = request.headers['X-Vicarius-Auth'];
         }
-        if(token === undefined) throw;
+        if(token === undefined) throw token;
     } catch(e){
         return reply(Boom.badImplementation('Bad credentials object received for vicariusAuth auth validation'), { log: { tags: 'credentials' } });
     }
