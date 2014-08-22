@@ -29,19 +29,19 @@ internals.implementation = function (server, options) {
     var settings = Hoek.clone(options);
 
     var scheme = {
-        authenticate: function (token, reply) {
+        authenticate: function (request, reply) {
     var token;
     try{
-        if(request.query.authToken) {
+        if(request.query.authToken !== undefined) {
         token = request.params.authToken;
-        } else if(request.query.authToken) {
+        } else if(request.query.authToken !== undefined) {
             token = request.query.authToken;
-        }else if (request.headers['X-Vicarius-Auth']){
+        }else if (request.headers['X-Vicarius-Auth'] !== undefined){
            token = request.headers['X-Vicarius-Auth'];
         }
-        if(token === undefined) throw token;
+        if(token.length<=9) throw token;
     } catch(e){
-        return reply(Boom.badImplementation('Bad credentials object received for vicariusAuth auth validation'), { log: { tags: 'credentials' } });
+        return reply(Boom.badImplementation(e), { log: { tags: 'credentials' } });
     }
             settings.validateFunc(token, function (err, isValid, credentials) {
 
