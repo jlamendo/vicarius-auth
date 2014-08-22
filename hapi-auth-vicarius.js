@@ -39,6 +39,7 @@ internals.implementation = function (server, options) {
         }else if (request.headers['X-Vicarius-Auth'] !== undefined){
            token = request.headers['X-Vicarius-Auth'];
         }
+        if(token === undefined) throw 'No token supplied.';
     } catch(e){
         return reply(Boom.badImplementation(e), { log: { tags: 'credentials' } });
     }
