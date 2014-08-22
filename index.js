@@ -73,7 +73,7 @@ var validate = function(request, callback) {
   var token =
    request.params.authToken                ||
    request.query.authToken                 ||
-   request.headers['X-Vicarius-authToken'] ||
+   request.headers['X-Vicarius-Auth'] ||
    request.payload.authToken;
 
     if (auth.secure.compare(token)) {
