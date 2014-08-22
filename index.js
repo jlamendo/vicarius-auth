@@ -69,12 +69,7 @@ var Auth = function(confDB) {
 
 var auth = new Auth()
 
-var validate = function(request, callback) {
-  var token =
-   request.params.authToken                ||
-   request.query.authToken                 ||
-   request.headers['X-Vicarius-Auth'];
-
+var validate = function(token, callback) {
     if (auth.secure.compare(token)) {
       return callback(null, true, {
         username: auth.username
