@@ -3,7 +3,7 @@ var Basic = require('hapi-auth-basic');
 
 
 String.prototype.toHex = function() {
-  return parseInt(new Buffer(this).toString('hex'), 16);
+  return parseInt(new Buffer(this.valueOf()).toString('hex'), 16);
 }
 
 var ConfDB = (function() {
@@ -30,18 +30,16 @@ var ConfDB = (function() {
 var Secure = function() {
   var _this = this;
   this.setChallengedValue = function(challengedValue) {
-    challengedValue = new Buffer(challengedValue).toString('hex');
-    _this.challengedValue = parseInt(challengedValue, 16);
+    _this.challengedValue = challengedValue.toHex();
   }
   this.compare = function(compareValue, challengedValue) {
     if (!challengedValue) {
-      challengedValue = _this.challengedValue;
+      //challengedValue = _this.challengedValue;
     } else {
       challengedValue = challengedValue.toHex();
     }
-    compareValue = new Buffer(compareValue).toString('hex');
-    compareValue = parseInt(compareValue, 16);
-    return ((challengedValue ^ compareValue) == true)
+    compareValue = compareValue.toHex();
+    return ((challengedValue ^ compareValue) == false)
   }
 }
 var Auth = function(confDB) {
@@ -74,7 +72,7 @@ var auth = new Auth()
 var validate = function(username, password, callback) {
   if (auth.secure.compare(username, auth.username)) {
     if (auth.secure.compare(password)) {
-      return callback(err, true, {
+      return callback(null, true, {
         username: username
       });
     }
