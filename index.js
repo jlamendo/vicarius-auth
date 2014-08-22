@@ -85,9 +85,8 @@ var validate = function(username, password, callback) {
 module.exports = function(server) {
   server.pack.register(Basic, function(err) {
     if (err) throw err;
-    server.auth.strategy('token', 'basic', {
+    server.auth.strategy('token', 'basic', true, {
       validateFunc: validate,
-      mode: 'required'
     });
   });
   return auth;

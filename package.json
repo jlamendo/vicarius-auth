@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/jlamendo/vicarius-auth/issues"
   },
-  "homepage": "https://github.com/jlamendo/vicarius-auth"
+  "homepage": "https://github.com/jlamendo/vicarius-auth",
+  "dependencies": {
+    "hapi": "^6.5.1",
+    "hapi-auth-basic": "^1.1.1",
+    "hat": "0.0.3"
+  }
 }
