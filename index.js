@@ -60,7 +60,7 @@ var Auth = function(confDB) {
   }
   this.cycleToken = function() {
     var newConf = _this.confDB.data;
-    newConf.user.authToken = hat(24);
+    newConf.user.authToken = hat(64);
     _this.secure.setChallengedValue(newConf.user.authToken);
     _this.confDB.save(newConf);
     return newConf.user.authToken;
