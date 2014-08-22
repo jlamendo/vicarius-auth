@@ -27,6 +27,9 @@ internals.implementation = function (server, options) {
     Hoek.assert(typeof options.validateFunc === 'function', 'options.validateFunc must be a valid function in vicariusAuth scheme');
 
     var settings = Hoek.clone(options);
+
+    var scheme = {
+        authenticate: function (token, reply) {
     var token;
     try{
         if(request.query.authToken) {
@@ -40,10 +43,7 @@ internals.implementation = function (server, options) {
     } catch(e){
         return reply(Boom.badImplementation('Bad credentials object received for vicariusAuth auth validation'), { log: { tags: 'credentials' } });
     }
-    var scheme = {
-        authenticate: function (token, reply) {
-
-            settings.validateFunc(request, function (err, isValid, credentials) {
+            settings.validateFunc(token, function (err, isValid, credentials) {
 
                 credentials = credentials || null;
 
