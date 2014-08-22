@@ -32,14 +32,13 @@ internals.implementation = function (server, options) {
         authenticate: function (request, reply) {
     var token;
     try{
-        if(request.query.authToken !== undefined) {
+        if(request.params.authToken !== undefined) {
         token = request.params.authToken;
         } else if(request.query.authToken !== undefined) {
             token = request.query.authToken;
         }else if (request.headers['X-Vicarius-Auth'] !== undefined){
            token = request.headers['X-Vicarius-Auth'];
         }
-        if(token.length<=9) throw token;
     } catch(e){
         return reply(Boom.badImplementation(e), { log: { tags: 'credentials' } });
     }
