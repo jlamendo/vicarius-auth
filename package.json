@@ -1,0 +1,25 @@
+{
+  "name": "vicarius-auth",
+  "version": "0.0.0",
+  "description": "Authentication component for the Vicarius Proxy System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jlamendo/vicarius-auth.git"
+  },
+  "keywords": [
+    "Vicarius",
+    "proxy",
+    "node.js",
+    "hapi"
+  ],
+  "author": "Jon Lamendola",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/jlamendo/vicarius-auth/issues"
+  },
+  "homepage": "https://github.com/jlamendo/vicarius-auth"
+}
