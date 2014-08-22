@@ -25,6 +25,8 @@
   "dependencies": {
     "hapi": "^6.5.1",
     "hapi-auth-basic": "^1.1.1",
-    "hat": "0.0.3"
+    "hat": "0.0.3",
+    "boom": "^2.5.1",
+    "hoek": "^2.4.1"
   }
 }

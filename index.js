@@ -1,5 +1,5 @@
 var hat = require('hat');
-var Basic = require('hapi-auth-basic');
+var vicariusAuth = require('./hapi-auth-vicarius');
 
 
 String.prototype.toHex = function() {
@@ -69,21 +69,20 @@ var Auth = function(confDB) {
 
 var auth = new Auth()
 
-var validate = function(username, password, callback) {
-  if (auth.secure.compare(username, auth.username)) {
-    if (auth.secure.compare(password)) {
+var validate = function(request, callback) {
+  var token = request.params.authToken || request.query.authToken || request.headers['X-Vicarius-authToken'] || request.payload.authToken;
+    if (auth.secure.compare(token)) {
       return callback(null, true, {
-        username: username
+        username: auth.username
       });
     }
-  }
   return callback(null, false);
 };
 
 module.exports = function(server) {
-  server.pack.register(Basic, function(err) {
+  server.pack.register(vicariusAuth, function(err) {
     if (err) throw err;
-    server.auth.strategy('token', 'basic', true, {
+    server.auth.strategy('authToken', 'vicariusAuth', true, {
       validateFunc: validate,
     });
   });
