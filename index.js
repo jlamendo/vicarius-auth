@@ -58,7 +58,7 @@ var Auth = function(confDB) {
   }
   this.cycleToken = function() {
     var newConf = _this.confDB.data;
-    newConf.user.authToken = hat(64);
+    newConf.user.authToken = hat();
     _this.secure.setChallengedValue(newConf.user.authToken);
     _this.confDB.save(newConf);
     return newConf.user.authToken;
@@ -70,7 +70,12 @@ var Auth = function(confDB) {
 var auth = new Auth()
 
 var validate = function(request, callback) {
-  var token = request.params.authToken || request.query.authToken || request.headers['X-Vicarius-authToken'] || request.payload.authToken;
+  var token =
+   request.params.authToken                ||
+   request.query.authToken                 ||
+   request.headers['X-Vicarius-authToken'] ||
+   request.payload.authToken;
+
     if (auth.secure.compare(token)) {
       return callback(null, true, {
         username: auth.username
