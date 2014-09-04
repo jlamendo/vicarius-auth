@@ -36,8 +36,8 @@ internals.implementation = function (server, options) {
         token = request.params.authToken;
         } else if(request.query.authToken !== undefined) {
             token = request.query.authToken;
-        }else if (request.headers['X-Vicarius-Auth'] !== undefined){
-           token = request.headers['X-Vicarius-Auth'];
+        }else if (request.headers['x-vicarius-auth'] !== undefined){
+           token = request.headers['x-vicarius-auth'];
         }
         if(token === undefined) throw 'No token supplied.';
     } catch(e){
